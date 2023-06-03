@@ -3,7 +3,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
-import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-navbar',
@@ -146,9 +146,7 @@ export class NavbarComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Se hizo clic en "Aceptar"
-        if (dialogData.photoURL !== null) { // Comprobar si photoURL no es null
-          this.photoURL = dialogData.photoURL; // Actualizar el valor del photoURL en el componente principal
-
+        if (dialogData.photoURL !== undefined) { // Comprobar si photoURL no es null ni undefined
           if (dialogData.photoURL) {
             // Si hay una nueva imagen seleccionada
             const blob = this.dataURLtoBlob(dialogData.photoURL);
@@ -158,6 +156,7 @@ export class NavbarComponent {
                 getDownloadURL(storageRef).then(downloadURL => {
                   this.authService.updatePhotoURL(downloadURL).then(() => {
                     // El photoURL se actualizó correctamente
+                    this.photoURL = downloadURL; // Actualizar el valor de photoURL en el componente
                   }).catch(error => {
                     // Ocurrió un error al actualizar el photoURL
                     console.error(error);
@@ -178,20 +177,31 @@ export class NavbarComponent {
             // No se seleccionó una nueva imagen, pero se eliminó la imagen existente
             this.authService.updatePhotoURL(null).then(() => {
               // El photoURL se actualizó correctamente
+              this.photoURL = undefined; // Actualizar el valor de photoURL en el componente a undefined
+              const storageRef = ref(this.storage, `perfil-img/${this.authService.userData.displayName}`);
+              deleteObject(storageRef).then(() => {
+                // La imagen se eliminó correctamente
+              }).catch(error => {
+                // Ocurrió un error al eliminar la imagen del almacenamiento de Firebase
+                console.error(error);
+              });
             }).catch(error => {
               // Ocurrió un error al actualizar el photoURL
               console.error(error);
             });
           }
         } else {
-          // El valor de photoURL es null
-          console.error('El valor de photoURL es null');
+          // El valor de photoURL es null o undefined
+          console.error('El valor de photoURL es null o undefined');
         }
       } else {
         // Se hizo clic en "Cancelar" o se cerró el diálogo sin realizar ninguna acción
       }
     });
   }
+
+
+
 
 
 
