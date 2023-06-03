@@ -1,0 +1,230 @@
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  .loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+
+.app-create-city {
+  padding-top: 60px;
+  height: 100vh;
+  overflow: hidden;
+
+  .displayTable {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .displayTableCell {
+      width: 470px;
+      justify-content: center;
+      display: flex;
+      background: white;
+
+      .displayContent {
+        justify-content: center;
+        display: flex;
+        margin: 70px 6px 0 6px !important;
+        overflow-y: auto;
+        padding-bottom: 10px;
+        justify-content: center;
+
+        .displayForm {
+
+          margin-top: 50px;
+          width: 100%;
+
+          .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          }
+
+          .title {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 35px;
+            margin-bottom: 35px;
+          }
+
+          .form {
+            .nombre {
+              width: 280px;
+              //height: 100%;
+              border-radius: 4px;
+              display: block;
+              align-items: center;
+              margin-bottom: 20px;
+              margin-right: 0;
+              margin-left: 0;
+
+              .labelName {
+                color: #44667F;
+                font-size: 14px;
+                margin-bottom: 6px;
+                display: inline-block;
+              }
+
+              .inputName {
+                text-transform: capitalize;
+                outline: none !important;
+                height: 38px !important;
+                padding-left: 10px;
+                border: 1px solid #BACCDB;
+                border-radius: 4px;
+                width: 100%;
+
+                &.fieldObligatoryError {
+                  border: 1px solid red !important;
+                }
+              }
+
+              p {
+                margin-top: 0;
+                font-size: 12px;
+
+                &.fieldObligatoryError {
+                  color: red !important;
+                }
+              }
+            }
+
+            .latitude,
+            .longitude {
+              display: none;
+            }
+
+            .fileInputLabel {
+              width: 280px;
+              height: 40px;
+              background: white;
+              border-color: #004254;
+              margin-top: 40px;
+              border-radius: 4px;
+              border-width: 1px;
+              box-shadow: none;
+              display: block;
+              color: #004254;
+              padding: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              outline: none;
+
+              &.fieldObligatoryError {
+                border: 1px solid red !important;
+              }
+
+              &:hover {
+                background-color: #eef2f5;
+              }
+            }
+
+            .fileInput {
+              display: none;
+            }
+
+            p {
+              margin-top: 10px;
+              font-size: 12px;
+
+              &.fieldObligatoryError {
+                color: red !important;
+              }
+            }
+
+            .imagePreview {
+              display: flex;
+              align-items: center;
+              margin-top: 40px;
+
+              .previewContainer {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+              }
+
+              .previewImage-large {
+                width: 75px;
+                height: auto;
+                margin-right: 5px;
+              }
+
+              .imageName {
+                flex: 1;
+                font-size: 12px;
+                text-align: center;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 170px;
+              }
+
+              .delete-icon {
+                width: 20px;
+                height: 20px;
+                background-image: url("../../assets/img/eliminar.svg");
+                background-size: cover;
+                cursor: pointer;
+                margin-left: auto;
+              }
+            }
+
+            .btn {
+              margin-top: 40px;
+              width: 280px;
+              height: 40px;
+              background: #004254;
+              border-radius: 4px;
+              box-shadow: none;
+              display: block;
+              color: white;
+              --bs-btn-border-color: none !important;
+            }
+          }
+        }
+      }
+    }
+
+    .map-container {
+      flex: 1;
+      height: 100%;
+
+      #map {
+        height: 100%;
+
+        &.fieldObligatoryError {
+          border: 2px solid red !important;
+        }
+      }
+    }
+  }
+}

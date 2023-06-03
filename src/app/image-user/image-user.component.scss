@@ -1,0 +1,26 @@
+.image-user {
+  height: 88px;
+  background-color: transparent;
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  color: #2b373b;
+
+  .initials {
+    width: 88px;
+    height: 88px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #004254;
+    border: 1px solid #004254;
+    padding-top: 10%;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .photoURL {
+    width: 70px;
+    height: 70px;
+  }
+}

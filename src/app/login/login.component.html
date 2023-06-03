@@ -1,0 +1,67 @@
+<div class="app-login">
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="displayContent" id="displayContent">
+        <div class="displayForm">
+
+          <img src="../../assets/img/logo.png" class="logo">
+          <h2 class="title">Inicie sesión en su cuenta</h2>
+          <form [formGroup]="registerForm" class="authBlock">
+            <div class="authBlock">
+
+              <div class="formGroup usuario">
+                <label for="email" class="labelUsername">Email</label>
+                <input type="email" class="formControl inputUser"
+                  [ngClass]="this.existsError|| this.userNotExists? 'fieldObligatoryError':''" formControlName="email"
+                  placeholder="Email" #userName required />
+              </div>
+
+              <div class="formGroup contraseña">
+                <label for="password" class="labelPassword">Contraseña</label>
+                <input type="password" formControlName="password" class="formControl inputPassword"
+                  [ngClass]="this.existsError|| this.userNotExists? 'fieldObligatoryError':''" placeholder="Contraseña"
+                  #userPassword required />
+                <p class="fieldObligatoryError" *ngIf="this.existsError">
+                  Email o contraseña incorrectos.</p>
+
+                <p class="fieldObligatoryError" *ngIf="this.userNotExists">
+                  Usuario no registrado.</p>
+
+              </div>
+
+              <div class="formGroup signIn">
+                <input type="button" class="btn btnPrimary" value="Acceder" (click)="signUpViaEmail()" />
+              </div>
+
+              <div class="formGroup or">
+                <span class="or"><span class="orInner">O</span></span>
+              </div>
+
+              <div class="formGroup google">
+                <button type="button" class="btn googleBtn" (click)="googleLogin()">
+                  Acceder con
+
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                    <path
+                      d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+                  </svg>
+
+                </button>
+              </div>
+            </div>
+            <div class="forgotPassword">
+              <span style="cursor:pointer" routerLink="/forgot-password">¿Olvidó la contraseña?</span>
+            </div>
+
+            <div class="redirectToLogin">
+              <span class="redirect" style="cursor:pointer" routerLink="../register">
+                Regístrate</span>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

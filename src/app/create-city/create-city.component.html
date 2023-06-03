@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+
+
+<div class="loading-overlay" *ngIf="loading">
+  <div class="loading-spinner"></div>
+</div>
+
+
+<div class="app-create-city">
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="displayContent">
+        <div class="displayForm">
+          <img src="../../assets/img/logo.png" class="logo">
+          <h2 class="title">Crear Ciudad</h2>
+
+          <form [formGroup]="formulario" (ngSubmit)="send($event)" class="form">
+            <div class="formGroup nombre">
+              <label class="labelName" for="Name">Nombre *</label>
+              <input type="text" class="formControl inputName"
+                [ngClass]="this.existsErrorName ? 'fieldObligatoryError':''" formControlName="name" />
+              <p class="fieldObligatoryError" *ngIf="this.existsErrorName">
+                Introduzca un nombre</p>
+            </div>
+
+            <div class="formGroup latitude">
+              <label class="form-label">Latitude</label>
+              <input type="text" class="form-control" formControlName="latitude">
+            </div>
+            <div class="formGroup longitude">
+              <label class="form-label">Longitude</label>
+              <input type="text" class="form-control" formControlName="longitude">
+            </div>
+
+            <div class="formGroup image">
+              <div class="fileUpload">
+                <button class="fileInputLabel" [hidden]="hasSelectedImage"
+                  [ngClass]="this.existsErrorImage ? 'fieldObligatoryError':''"
+                  (click)="fileInput.click(); $event.preventDefault()">Subir Imagen</button>
+                <input id="fileInput" type="file" class="fileInput" #fileInput (change)="onFileSelected($event)">
+              </div>
+              <div *ngIf="hasSelectedImage" class="imagePreview">
+                <div class="previewContainer">
+                  <img [src]="selectedImage" alt="Preview" class="previewImage-large">
+                  <div class="imageName">{{ selectedImageName }}</div>
+                </div>
+                <span class="delete-icon" (click)="removeImage()"></span>
+              </div>
+            </div>
+
+            <p class="fieldObligatoryError" *ngIf="!isPreviewingImage && existsErrorImage">
+              Seleccione una imagen</p>
+            <p class="fieldObligatoryError" *ngIf="this.existsErrorLocation">
+              Seleccione una ubicación en el mapa</p>
+
+            <input type="submit" value="Enviar" class="btn btn-info">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <div id="map" [ngClass]="this.existsErrorLocation ? 'fieldObligatoryError':''"></div>
+    </div>
+  </div>
+</div>

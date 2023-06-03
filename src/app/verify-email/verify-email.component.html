@@ -1,0 +1,40 @@
+<div class="app-verify-email">
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="displayContent" id="displayContent">
+        <div class="displayVerify">
+          <img src="../../assets/img/logo.png" class="logo">
+          <h3 class="title">¡Gracias por registrarte!</h3>
+          <div class="authBlock">
+
+            <div class="formGroup info" *ngIf="authService.userData as user">
+              <p class="text-center">
+                Hemos enviado un email de confirmación a <strong>{{ user.email }}</strong>.
+              </p>
+              <p class="text-center">
+                Por favor, revise su correo electrónico y haga click en el link para verificar su dirección de email
+              </p>
+            </div>
+
+            <div class="formGroup button">
+              <p class="text-center" *ngIf="enviada">Correo de confirmación enviado</p>
+              <button type="button" class="btn btnPrimary" (click)="resendVerification()">
+                <i class="fas fa-redo-alt"></i>
+                Reenviar confirmación
+              </button>
+
+              <div class="redirectToLogin">
+                <span class="redirectLogin" style="cursor:pointer" *ngIf="fromRegister" routerLink="../register">
+                  Volver al registro
+                </span>
+                <span class="redirectRegistro" style="cursor:pointer" *ngIf="!fromRegister" routerLink="../login">
+                  Volver al login
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

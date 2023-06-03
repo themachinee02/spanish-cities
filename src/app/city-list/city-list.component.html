@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+
+<div class="cities">
+  <div class="city" *ngFor="let city of cities" style="width: 18rem;">
+    <img src="{{city.image}}" alt="Card image cap" class="card-img-top" (click)="onclick(city.uid!.toLowerCase())">
+    <div class="card-body">
+      <h4 class="card-title" (click)="onclick(city.uid!.toLowerCase())">{{city.name}}</h4>
+      <span class="delete-icon" (click)="openConfirmDialog(city)"></span>
+    </div>
+  </div>
+  <div (click)="createCity()">
+    <button class=" btn btn-primary fixed-button"><span class="add"></span></button>
+  </div>
+</div>

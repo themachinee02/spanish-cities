@@ -1,0 +1,195 @@
+.app-login {
+  padding-top: 0;
+  height: 100vh;
+  overflow: hidden;
+
+  .displayTable {
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 100%;
+
+    .displayTableCell {
+      position: relative;
+      width: 470px;
+      justify-content: center;
+      display: flex;
+      background: white;
+      height: 100%;
+
+      .displayContent::-webkit-scrollbar {
+        display: none;
+      }
+
+      .displayContent {
+        justify-content: center;
+        display: flex;
+        /* width: 280px; */
+        margin: 70px 6px 0 6px !important;
+        overflow-y: auto;
+        padding-right: 15px;
+        padding-bottom: 10px;
+
+
+
+        .displayForm {
+          margin-top: 50px;
+          width: 100%;
+
+          .logo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+          }
+
+          .title {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 35px;
+            margin-bottom: 35px;
+          }
+
+          .authBlock {
+
+            .usuario {
+              width: 280px;
+              //height: 100%;
+              border-radius: 4px;
+              display: block;
+              align-items: center;
+              margin-bottom: 20px;
+              margin-right: 0;
+              margin-left: 0;
+
+              .labelUsername {
+                color: #44667F;
+                font-size: 14px;
+                margin-bottom: 6px;
+                display: inline-block;
+              }
+
+              .inputUser {
+                outline: none !important;
+                height: 38px !important;
+                padding-left: 10px;
+                border: 1px solid #BACCDB;
+                border-radius: 4px;
+                width: 100%;
+
+                &.fieldObligatoryError {
+                  border: 1px solid red !important;
+                }
+              }
+            }
+
+            .contraseña {
+              width: 280px;
+              //height: 100%;
+              border-radius: 4px;
+              display: block;
+              align-items: center;
+              margin-bottom: 0;
+              margin-left: 0;
+
+              .labelPassword {
+                color: #44667F;
+                font-size: 14px;
+                margin-bottom: 6px;
+                display: inline-block;
+              }
+
+              .inputPassword {
+                outline: none !important;
+                height: 38px !important;
+                padding-left: 10px;
+                border: 1px solid #BACCDB;
+                border-radius: 4px;
+                width: 100%;
+
+                &.fieldObligatoryError {
+                  border: 1px solid red !important;
+                }
+              }
+
+              p {
+                font-size: 12px;
+
+                &.fieldObligatoryError {
+                  color: red !important;
+                }
+              }
+
+
+
+            }
+
+
+            .signIn {
+              .btn {
+                margin-top: 40px;
+                width: 280px;
+                height: 40px;
+                background: #004254;
+                border-radius: 4px;
+                box-shadow: none;
+                display: block;
+                color: white;
+              }
+            }
+
+            .or {
+              text-align: center;
+              margin-top: 15px;
+              margin-bottom: 15px;
+            }
+
+            .google {
+              .btn {
+                width: 280px;
+                height: 40px;
+                background: white;
+                border-color: #004254;
+                border-radius: 4px;
+                border-width: 1px;
+                box-shadow: none;
+                display: block;
+                color: #004254;
+
+                svg {
+                  height: 25px;
+                  margin-top: -3px;
+                  margin-left: 5px;
+                }
+              }
+            }
+
+            .forgotPassword {
+              text-align: center;
+              margin-top: 15px;
+
+              span {
+                color: #004254;
+                text-decoration: underline;
+                font-size: 14px;
+              }
+            }
+
+            .redirectToLogin {
+              text-align: center;
+              margin-top: 15px;
+
+              span {
+                color: #004254;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

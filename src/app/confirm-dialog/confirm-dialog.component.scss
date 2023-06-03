@@ -1,0 +1,107 @@
+.app-confirm-dialog {
+  background-color: white;
+  min-height: 185px;
+  max-height: 90vh;
+  border-radius: 8px;
+
+
+  .titlebar {
+    min-height: 56px;
+    padding: 18px 16px;
+    background-color: #f0f4f8;
+    font-size: 16px;
+    color: #2b373b;
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+
+    .title {
+      width: 100%;
+      margin: 0;
+      float: none;
+    }
+  }
+
+  .messagebar {
+    padding: 1em 2em;
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    overflow-y: auto;
+    font-weight: 300;
+    background-color: #fff;
+    color: #4a4a4a;
+    border: 0;
+    position: relative;
+    background: 0;
+
+    .message {
+      font-size: 14px;
+      font-weight: 300;
+      color: #4a4a4a;
+    }
+  }
+
+  .edit {
+    .desktopSelector-uploader {
+
+      display: none;
+
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0;
+    text-align: right;
+    position: relative;
+    top: -1px;
+    background-color: #fff;
+    color: #4a4a4a;
+    border: 0;
+    padding: 0.571em 1em;
+    flex-shrink: 0;
+
+    .primary {
+      margin: 0 0.5em 0 0;
+      width: auto;
+      background-color: #004254;
+      padding: 0 1rem !important;
+      font-size: 14px;
+      letter-spacing: .15px;
+      transition: background-color .35s, box-shadow .35s;
+      display: inline-flex;
+      align-items: center;
+      height: 32px;
+      border: none;
+      color: #fff;
+      border-radius: 3px;
+      position: relative;
+      text-decoration: none !important;
+      cursor: pointer;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .secondary {
+      margin: 0 0.5em 0 0;
+      width: auto;
+      border: 1px solid #004254;
+      color: #004254;
+      background-color: transparent;
+      padding: 0 1rem !important;
+      font-size: 14px;
+      letter-spacing: .15px;
+      transition: background-color .35s, box-shadow .35s;
+      display: inline-flex;
+      align-items: center;
+      height: 32px;
+      position: relative;
+      text-decoration: none !important;
+      cursor: pointer;
+      text-align: center;
+      overflow: visible;
+      border-radius: 3px;
+
+    }
+  }
+}

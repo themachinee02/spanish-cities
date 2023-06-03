@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="app-city-map">
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="displayContent">
+        <div class="city">
+          <div class="name">
+            <h2 class="nameText">{{cityChosen?.name}}</h2>
+          </div>
+          <div class="image"><img src="{{cityChosen?.image}}" alt=""></div>
+
+          <div class="volver">
+            <input type="button" class="btn btnPrimary" value="Volver al listado" routerLink="../../list" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>

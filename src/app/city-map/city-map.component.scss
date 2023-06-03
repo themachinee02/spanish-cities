@@ -1,0 +1,83 @@
+.app-city-map {
+  padding-top: 60px;
+  height: 100vh;
+  overflow: hidden;
+
+  .displayTable {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .displayTableCell {
+      width: 470px;
+      justify-content: center;
+      display: flex;
+      background: white;
+
+      .displayContent {
+        justify-content: center;
+        display: flex;
+        margin: 70px 6px 0 6px !important;
+        overflow-y: auto;
+        padding-bottom: 10px;
+        justify-content: center;
+
+        .city {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding-top: 80px;
+          height: 100%;
+
+
+          .name {
+            margin-top: 35px;
+            margin-bottom: 35px;
+
+            .nameText {
+              font-size: 20px;
+              text-align: center;
+            }
+
+          }
+
+          .image {
+            margin-top: 35px;
+            margin-bottom: 35px;
+
+            img {
+              width: 400px;
+              height: 230px;
+              object-fit: contain;
+            }
+          }
+
+          .volver {
+            .btn {
+              margin-top: 35px;
+              width: 280px;
+              height: 40px;
+              background: #004254;
+              border-radius: 4px;
+              box-shadow: none;
+              display: block;
+              color: white;
+            }
+          }
+
+
+        }
+      }
+    }
+
+    .map-container {
+      flex: 1;
+      height: 100%;
+
+      #map {
+        height: 100%;
+      }
+    }
+  }
+}

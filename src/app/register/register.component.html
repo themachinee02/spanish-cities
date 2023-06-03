@@ -1,0 +1,92 @@
+<div class="app-register">
+  <div class="displayTable">
+    <div class="displayTableCell">
+      <div class="displayContent" id="displayContent">
+        <div class="displayForm">
+          <img src="../../assets/img/logo.png" class="logo" alt="">
+          <h3 class="title">Regístrate</h3>
+          <form [formGroup]="registerForm" class="authBlock">
+            <div class="authBlock">
+              <div class="formGroup nombre">
+                <label for="name" class="labelName">Nombre</label>
+                <input type="text" formControlName="name" class="formControl inputName" placeholder="Nombre" #userName
+                  [ngClass]="this.existsErrorName? 'fieldObligatoryError':''" required />
+
+                <p class="fieldObligatoryError" *ngIf="this.existsErrorName">
+                  Introduzca un nombre</p>
+
+              </div>
+              <div class="formGroup apellidos">
+                <label for="surnames" class="labelSurname">Apellidos</label>
+                <input type="text" formControlName="surnames" class="formControl inputSurname" placeholder="Apellidos"
+                  [ngClass]="this.existsErrorSurname? 'fieldObligatoryError':''" #userSurnames required />
+
+                <p class="fieldObligatoryError" *ngIf="this.existsErrorSurname">
+                  Introduzca los apellidos</p>
+
+              </div>
+              <div class="formGroup email">
+                <label for="email" class="labelEmail">Email</label>
+                <input type="email" class="formControl inputEmail" placeholder="Email" formControlName="email"
+                  [ngClass]="this.existsErrorEmail? 'fieldObligatoryError':''" #userEmail required />
+
+                <p class="fieldObligatoryError" *ngIf="this.existsErrorEmail">
+                  Email no válido</p>
+
+                <p class="fieldObligatoryError" *ngIf="this.existEmail">
+                  Email ya registrado, pruebe con otro</p>
+
+              </div>
+
+              <div class="formGroup contraseña">
+                <label for="password" class="labelPassword">Contraseña</label>
+                <input type="password" formControlName="password" class="formControl inputPassword"
+                  [ngClass]="this.existsErrorPassword? 'fieldObligatoryError':''" placeholder="Contraseña" #userPwd
+                  required />
+
+                <p class="fieldObligatoryError" *ngIf="this.existsErrorPassword">
+                  Contraseña no válida</p>
+
+              </div>
+              <div class="formGroup confirmaContraseña">
+                <label for="confirmPassword" class="labelConfirmPassword">Confirmar Contraseña</label>
+                <input type="password" formControlName="confirmPassword" class="formControl confirmPassword"
+                  [ngClass]="this.existsErrorConfirmPassword? 'fieldObligatoryError':''"
+                  placeholder="Confirmar Contraseña" #userPwd required />
+
+                <p class="fieldObligatoryError" *ngIf="this.existsErrorConfirmPassword">
+                  Las contraseñas no coinciden</p>
+
+              </div>
+
+              <div class="formGroup emailSign">
+                <input type="button" class="btn btnPrimary" value="Registrarse" (click)="signUpViaEmail()" />
+              </div>
+
+              <div class="formGroup or">
+                <span class="or"><span class="orInner">O</span></span>
+              </div>
+
+              <!-- Continue with Google -->
+              <div class="formGroup google">
+                <button type="button" class="btn googleBtn" (click)="googleLogin()">
+                  Registrarse con <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 488 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                      d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="redirectToLogin">
+
+              <span class="redirect" style="cursor:pointer" routerLink="../login">Volver al login</span>
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

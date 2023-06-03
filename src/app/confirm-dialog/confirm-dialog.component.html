@@ -1,0 +1,54 @@
+<div class="app-confirm-dialog">
+  <div class="titlebar">
+    <span class="title">{{ data.title }}</span>
+  </div>
+
+  <div class="messagebar">
+    <span class="message">{{ data.message }}</span>
+  </div>
+
+  <div class="edit" *ngIf="data.showModifyOption && data.showDeleteOption">
+
+    <div class="desktopSelector-uploader">
+      <p-fileUpload chooseLabel="Cargar Imagen" [fileLimit]="1" [previewWidth]="200"></p-fileUpload>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-col-3">
+        <app-image-user *ngIf="data.photoURL" [model]="tempImageDesktop" modelAttrImage="image"
+          [photoURL]="data.photoURL !== undefined ? data.photoURL : null"></app-image-user>
+        <app-image-user *ngIf="!data.photoURL" [model]="tempImageDesktop" modelAttrImage="image"
+          [photoURL]="data.photoURL !== undefined ? data.photoURL : null"></app-image-user>
+
+
+
+      </div>
+      <div class="p-col-9">
+        <ul>
+          <li (click)="fileInput.click(); $event.preventDefault()">
+            <span class="uploadIcon"></span>
+            Cargar Imagen
+          </li>
+          <input id="fileInput" type="file" class="fileInput" style="display: none;" (change)="onFileSelected($event)"
+            #fileInput>
+
+          <li (click)="deleteImage()">
+            <span class="deleteIcon"></span>
+            Eliminar Imagen
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- <button class="primary" color="primary" (click)="modifyImage()">Modificar
+      imagen</button>
+    <button class="secondary" color="warn" (click)="deleteImage()">Eliminar
+      imagen</button> -->
+  </div>
+
+  <div class="buttons">
+    <button class="primary" color="primary" (click)="closeDialog(true)">Aceptar</button>
+    <button class="secondary" color="warn" (click)="closeDialog(false)">Cancelar</button>
+  </div>
+
+</div>
