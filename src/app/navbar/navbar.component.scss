@@ -151,6 +151,22 @@
           line-height: 20px;
           color: #2b373b;
 
+          .image {
+            height: 88px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 16px;
+            line-height: 20px;
+            color: #2b373b;
+
+            img {
+              border-radius: 50%;
+              width: 88px;
+              height: 88px;
+              display: inline-block;
+            }
+          }
+
           .editImage {
             cursor: pointer;
             position: absolute;

@@ -33,10 +33,11 @@ export class AuthService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        this.userData = JSON.parse(localStorage.getItem('user')!); // Asignar el valor a authService.userData
+        this.userData = JSON.parse(localStorage.getItem('user')!);
+        this.updateUserDataWithPhotoURL();
       } else {
         localStorage.setItem('user', 'null');
-        this.userData = JSON.parse(localStorage.getItem('user')!); // Asignar el valor a authService.userData
+        this.userData = JSON.parse(localStorage.getItem('user')!);
       }
     });
   }
@@ -183,6 +184,21 @@ export class AuthService {
     });
   }
 
+  private updateUserDataWithPhotoURL() {
+    if (this.userData && this.userData.photoURL) {
+      const image = new Image();
+      image.onload = () => {
+        // La imagen existe en Firebase Storage, no se necesita hacer nada
+      };
+      image.onerror = () => {
+        // La imagen no existe en Firebase Storage, se actualiza el valor en el servicio y en el localStorage
+        this.userData.photoURL = null;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+      };
+      image.src = this.userData.photoURL;
+    }
+  }
+
   public checkEmailVerification(): boolean {
 
     const currentUserPromise = this.afAuth.currentUser;
@@ -207,11 +223,23 @@ export class AuthService {
   updatePhotoURL(photoURL: string | null): Promise<void> {
     return this.afAuth.currentUser.then(user => {
       if (user) {
-        return user.updateProfile({ photoURL });
+        return user.updateProfile({ photoURL }).then(() => {
+          this.userData.photoURL = photoURL; // Actualizar el valor en authService.userData
+          localStorage.setItem('user', JSON.stringify(this.userData)); // Actualizar el valor en el localStorage
+
+          // Eliminar la foto del almacenamiento local si la URL es nula
+          if (photoURL === null) {
+            localStorage.removeItem('userPhoto'); // Eliminar la foto del almacenamiento local
+          }
+        });
       }
       throw new Error('Usuario no encontrado');
+    }).catch(error => {
+      console.error('Error al actualizar la foto del perfil:', error);
+      throw error; // Relanzar el error para que se pueda manejar en otra parte del código
     });
   }
+
 
   public navigateToLogin() {
     this.router.navigate(['/login']);

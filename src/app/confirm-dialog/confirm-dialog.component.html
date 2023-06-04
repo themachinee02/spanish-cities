@@ -15,22 +15,22 @@
 
     <div class="p-grid">
       <div class="p-col-3">
-        <app-image-user *ngIf="data.photoURL" [model]="tempImageDesktop" modelAttrImage="image"
-          [photoURL]="data.photoURL !== undefined ? data.photoURL : null"></app-image-user>
-        <app-image-user *ngIf="!data.photoURL" [model]="tempImageDesktop" modelAttrImage="image"
-          [photoURL]="data.photoURL !== undefined ? data.photoURL : null"></app-image-user>
-
-
+        <div class="header-info">
+          <app-image-user *ngIf="data.photoURL" modelAttrImage="image" [photoURL]="data.photoURL"
+            class="custom-image"></app-image-user>
+          <!-- <app-image-user *ngIf="!data.photoURL" class="image-initials" class="custom-image" modelAttrImage="image"
+            [photoURL]="data.photoURL !== undefined ? data.photoURL : null"></app-image-user> -->
+        </div>
 
       </div>
       <div class="p-col-9">
+        <input id="fileInput" type="file" class="fileInput" style="display: none;" (change)="onFileSelected($event)"
+          #fileInput>
         <ul>
           <li (click)="fileInput.click(); $event.preventDefault()">
             <span class="uploadIcon"></span>
             Cargar Imagen
           </li>
-          <input id="fileInput" type="file" class="fileInput" style="display: none;" (change)="onFileSelected($event)"
-            #fileInput>
 
           <li (click)="deleteImage()">
             <span class="deleteIcon"></span>
@@ -47,8 +47,13 @@
   </div>
 
   <div class="buttons">
-    <button class="primary" color="primary" (click)="closeDialog(true)">Aceptar</button>
-    <button class="secondary" color="warn" (click)="closeDialog(false)">Cancelar</button>
+    <div class="btn">
+      <button class="primary" color="primary" (click)="closeDialog(true)">Aceptar</button>
+    </div>
+    <div class="btn">
+      <button class="secondary" color="warn" (click)="closeDialog(false)">Cancelar</button>
+    </div>
+
   </div>
 
 </div>

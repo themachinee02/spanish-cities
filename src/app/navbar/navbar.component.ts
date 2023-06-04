@@ -33,9 +33,9 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-
     setTimeout(() => {
       if (this.authService.userData && this.authService.userData.photoURL) {
+        console.log(this.authService.userData);
         this.userData = this.authService.userData;
         this.displayName = this.userData.displayName;
         this.photoURL = this.userData.photoURL;
@@ -104,6 +104,27 @@ export class NavbarComponent {
     });
   }
 
+  openChangePasswordDialog(): void {
+    const dialogData: ConfirmDialogData = {
+      title: 'Cambiar de contraseña',
+      message: 'Será redirigido a la pantalla de restablecer contraseña'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Se hizo clic en "Yes"
+        this.router.navigate(['/forgot-password/']);
+      } else {
+        return;
+      }
+    });
+  }
+
   dataURLtoBlob(dataURL: string): Blob | null {
     if (!dataURL) {
       return null;
@@ -128,7 +149,6 @@ export class NavbarComponent {
     return null;
   }
 
-
   openEditDialog(): void {
     const dialogData: ConfirmDialogData = {
       title: 'Cambiar imagen de perfil',
@@ -147,48 +167,55 @@ export class NavbarComponent {
       if (result) {
         // Se hizo clic en "Aceptar"
         if (dialogData.photoURL !== undefined) { // Comprobar si photoURL no es null ni undefined
-          if (dialogData.photoURL) {
-            // Si hay una nueva imagen seleccionada
-            const blob = this.dataURLtoBlob(dialogData.photoURL);
-            if (blob) {
-              const storageRef = ref(this.storage, `perfil-img/${this.authService.userData.displayName}`);
-              uploadBytes(storageRef, blob).then(() => {
-                getDownloadURL(storageRef).then(downloadURL => {
-                  this.authService.updatePhotoURL(downloadURL).then(() => {
-                    // El photoURL se actualizó correctamente
-                    this.photoURL = downloadURL; // Actualizar el valor de photoURL en el componente
+          if (dialogData.photoURL !== this.photoURL) { // Verificar si es una nueva imagen
+            if (dialogData.photoURL !== null) { // Verificar si photoURL no es null
+              // Si hay una nueva imagen seleccionada
+              const blob = this.dataURLtoBlob(dialogData.photoURL);
+              if (blob) {
+                const storageRef = ref(this.storage, `users/${this.authService.userData.displayName}`);
+                uploadBytes(storageRef, blob).then(() => {
+                  getDownloadURL(storageRef).then(downloadURL => {
+                    this.authService.updatePhotoURL(downloadURL).then(() => {
+                      // El photoURL se actualizó correctamente
+                      this.photoURL = downloadURL; // Actualizar el valor de photoURL en el componente
+                    }).catch(error => {
+                      // Ocurrió un error al actualizar el photoURL
+                      console.error(error);
+                    });
                   }).catch(error => {
-                    // Ocurrió un error al actualizar el photoURL
+                    // Ocurrió un error al obtener la URL de descarga de la imagen
                     console.error(error);
                   });
                 }).catch(error => {
-                  // Ocurrió un error al obtener la URL de descarga de la imagen
+                  // Ocurrió un error al subir la imagen al almacenamiento de Firebase
+                  console.error(error);
+                });
+              } else {
+                // El valor de photoURL no es un Data URL válido
+                console.error('El valor de photoURL no es un Data URL válido');
+              }
+            } else {
+              // No se seleccionó una nueva imagen, pero se eliminó la imagen existente
+              this.authService.updatePhotoURL(null).then(() => {
+                // El photoURL se actualizó correctamente
+                this.photoURL = undefined;// Actualizar el valor de photoURL en el componente a undefined
+                const storageRef = ref(this.storage, `users/${this.authService.userData.displayName}`);
+                deleteObject(storageRef).then(() => {
+                  console.log(storageRef);
+                  this.authService.userData.photoURL = undefined;
+                  this.authService.userData.providerData.photoURL = undefined;
+                  // La imagen se eliminó correctamente
+                }).catch(error => {
+                  // Ocurrió un error al eliminar la imagen del almacenamiento de Firebase
                   console.error(error);
                 });
               }).catch(error => {
-                // Ocurrió un error al subir la imagen al almacenamiento de Firebase
+                // Ocurrió un error al actualizar el photoURL
                 console.error(error);
               });
-            } else {
-              // El valor de photoURL no es un Data URL válido
-              console.error('El valor de photoURL no es un Data URL válido');
             }
           } else {
-            // No se seleccionó una nueva imagen, pero se eliminó la imagen existente
-            this.authService.updatePhotoURL(null).then(() => {
-              // El photoURL se actualizó correctamente
-              this.photoURL = undefined; // Actualizar el valor de photoURL en el componente a undefined
-              const storageRef = ref(this.storage, `perfil-img/${this.authService.userData.displayName}`);
-              deleteObject(storageRef).then(() => {
-                // La imagen se eliminó correctamente
-              }).catch(error => {
-                // Ocurrió un error al eliminar la imagen del almacenamiento de Firebase
-                console.error(error);
-              });
-            }).catch(error => {
-              // Ocurrió un error al actualizar el photoURL
-              console.error(error);
-            });
+            // Es la misma imagen, no se necesita actualizar
           }
         } else {
           // El valor de photoURL es null o undefined
@@ -202,9 +229,6 @@ export class NavbarComponent {
 
 
 
-
-
-
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     if (
@@ -215,5 +239,4 @@ export class NavbarComponent {
       this.showProfilePanel = false;
     }
   }
-
 }

@@ -1,4 +1,4 @@
 <div class="image-user">
-  <div *ngIf="photoURL === null" class="initials">{{ initials }}</div>
+  <span *ngIf="photoURL === null" class="initials">{{ initials }}</span>
   <img *ngIf="photoURL !== null" class="photoURL" src="{{ photoURL }}" alt="{{ photoURL }}" />
 </div>
