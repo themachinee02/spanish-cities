@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
@@ -18,8 +18,11 @@ export class NavbarComponent {
   userData: any;
   displayName: string | undefined;
   photoURL: string | undefined;
-
+  email: string | undefined;
+  name: string | undefined;
+  surname: string | undefined
   @ViewChild('profilePanel') profilePanel: ElementRef | undefined;
+  fromLogin: boolean | undefined;
 
   constructor(
     public authService: AuthService,
@@ -34,12 +37,15 @@ export class NavbarComponent {
 
   ngOnInit() {
     setTimeout(() => {
-      if (this.authService.userData && this.authService.userData.photoURL) {
+      if (this.authService.userData) {
         console.log(this.authService.userData);
         this.userData = this.authService.userData;
         this.displayName = this.userData.displayName;
+        const [name, surname] = this.displayName!.split(' ');
+        this.name = name;
+        this.surname = surname;
         this.photoURL = this.userData.photoURL;
-        console.log(this.photoURL);
+        this.email = this.userData.email;
       }
     }, 1000);
 
@@ -118,7 +124,7 @@ export class NavbarComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Se hizo clic en "Yes"
-        this.router.navigate(['/forgot-password/']);
+        this.router.navigate(['/forgot-password'], { queryParams: { fromLogin: true } });
       } else {
         return;
       }

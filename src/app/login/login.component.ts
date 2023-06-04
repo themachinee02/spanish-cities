@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   existsError: boolean = false;
   userNotExists: boolean = false;
+  fromLogin: boolean = false;
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     }
   );
 
-  constructor(public authService: AuthService, private fb: FormBuilder) { }
+  constructor(public authService: AuthService, private fb: FormBuilder, private router: Router) { }
   ngOnInit(): void {
     this.resizeApp();
   }
@@ -61,6 +62,10 @@ export class LoginComponent implements OnInit {
         this.existsError = false;
       }
     }, 500);
+  }
+
+  resetPassword() {
+    this.router.navigate(['/forgot-password'], { queryParams: { fromLogin: false } });
   }
   googleLogin() {
     this.authService.GoogleAuth(this.registerForm.value);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../shared/services/auth.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -12,10 +13,17 @@ export class ForgotPasswordComponent implements OnInit {
 
   noEmail: boolean = false;
 
+  fromLogin: boolean | undefined;
+
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.fromLogin = params['fromLogin'] === 'true';
+    });
     this.authService.showMessageError = false;
     this.authService.showMessageOK = false;
     this.noEmail = false;
