@@ -60,6 +60,7 @@ import { ImageUserComponent } from './image-user/image-user.component';
     GoogleMapsModule,
     ButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA0nNYSuwdKX-aVak2MLEUmbEjStdSyOAU'
     }),
