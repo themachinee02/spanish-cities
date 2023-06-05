@@ -62,10 +62,31 @@ export class CityListComponent {
     response;
   }
 
-  openConfirmDialog(city: City): void {
+  openDeleteDialog(city: City): void {
     const dialogData: ConfirmDialogData = {
       title: 'Eliminar ciudad',
       message: '¿Está seguro de eliminar ' + city.name + '?'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+        this.crudService.deleteCity(city);
+      } else {
+        return;
+      }
+    });
+  }
+
+  openFavDialog(city: City): void {
+    const dialogData: ConfirmDialogData = {
+      title: 'Añadir a favoritos',
+      message: 'Se va a agregar ' + city.name + ' a favoritos.'
     };
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

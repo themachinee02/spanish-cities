@@ -5,7 +5,8 @@
     <img src="{{city.image}}" alt="Card image cap" class="card-img-top" (click)="onclick(city.uid!.toLowerCase())">
     <div class="card-body">
       <h4 class="card-title" (click)="onclick(city.uid!.toLowerCase())">{{city.name}}</h4>
-      <span class="delete-icon" (click)="openConfirmDialog(city)"></span>
+      <span class="fav-icon" (click)="openFavDialog(city)"></span>
+      <span class="delete-icon" (click)="openDeleteDialog(city)"></span>
     </div>
   </div>
   <div (click)="createCity()">

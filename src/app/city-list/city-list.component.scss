@@ -40,11 +40,24 @@
   cursor: pointer;
 }
 
+.fav-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../assets/img/fav.svg");
+  background-size: cover;
+  cursor: pointer;
+}
+
 .card-title {
   font-size: 1.2rem;
   margin-right: 10px;
   color: #004254;
+  width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
+
 
 .fixed-button {
   position: fixed;
