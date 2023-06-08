@@ -8,6 +8,8 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { City } from './city';
+import { ConfirmDialogData } from 'src/app/confirm-dialog/confirm-dialog.component';
 
 
 @Injectable({
@@ -20,6 +22,7 @@ export class AuthService {
   public emailVerified: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public errorCredentials: boolean = false;
   public userNotExists: boolean = false;
+  loading: boolean = false;
 
   constructor(
     public afs: AngularFirestore,
@@ -44,6 +47,7 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(userData: User) {
+    this.loading = true;
     this.errorCredentials = false;
     this.userNotExists = false;
     return this.afAuth
@@ -53,6 +57,7 @@ export class AuthService {
           if (result.user?.emailVerified !== true) {
             this.router.navigate(['/verify-email'], { queryParams: { fromRegister: false } });
           } else {
+            this.userData = user;
             this.ngZone.run(() => {
               this.router.navigate(['/list']);
             });
@@ -134,7 +139,6 @@ export class AuthService {
       });
   }
 
-
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -154,25 +158,25 @@ export class AuthService {
       currentUser
         .then((userAuth) => {
           // Actualizar el perfil del usuario en Firebase Authentication
-          console.log(userAuth);
+          //console.log(userAuth);
           userAuth!.updateProfile({
             displayName: `${user.name} ${user.surnames}`
           })
             .then(() => {
-              console.log('Perfil de usuario actualizado correctamente en Firebase Authentication');
+              //console.log('Perfil de usuario actualizado correctamente en Firebase Authentication');
             })
             .catch((error) => {
-              console.error('Error al actualizar el perfil de usuario en Firebase Authentication:', error);
+              //console.error('Error al actualizar el perfil de usuario en Firebase Authentication:', error);
             });
         })
         .catch((error) => {
-          console.error('Error al obtener el objeto User de AngularFireAuth:', error);
+          //console.error('Error al obtener el objeto User de AngularFireAuth:', error);
         });
     } else {
-      console.error('No se ha encontrado el usuario actual en AngularFireAuth');
+      //console.error('No se ha encontrado el usuario actual en AngularFireAuth');
     }
 
-    console.log(userData);
+    //console.log(userData);
     return userRef.set(userData, { merge: true });
   }
 
@@ -208,7 +212,7 @@ export class AuthService {
           currentUser!.getIdToken().then(() => {
             const user = currentUser!.toJSON();
             localStorage.setItem('user', JSON.stringify(user));
-            console.log(user);
+            //console.log(user);
           });
         });
       }).catch((error: any) => {
@@ -218,6 +222,11 @@ export class AuthService {
 
     const user = JSON.parse(localStorage.getItem('user')!);
     return user && user.emailVerified;
+  }
+
+  getUserId(): string {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user.uid;
   }
 
   updatePhotoURL(photoURL: string | null): Promise<void> {

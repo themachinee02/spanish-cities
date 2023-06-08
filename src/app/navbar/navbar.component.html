@@ -13,13 +13,13 @@
       </div>
     </div>
     <div class="buttons">
-      <span class="profile" (click)="showProfilePanel = !showProfilePanel"></span>
+      <span class="fav-panel" (click)="toggleFavsPanel()"></span>
+      <span class="profile" (click)="toggleProfilePanel()"></span>
       <span class="ux-ui-log-out" (click)="openlogOutDialog()"></span>
     </div>
 
   </div>
 </div>
-
 
 <div class="profile-panel" [class.show]="showProfilePanel" #profilePanel>
   <div class="p-col-12 container">
@@ -86,6 +86,29 @@
     </div>
     <div class="button">
       <input type="button" class="btn btnPrimary" value="Cambiar Contraseña" (click)="openChangePasswordDialog()" />
+    </div>
+  </div>
+</div>
+
+<div class="fav" [class.show]="showFavsPanel" #favPanel>
+  <div class="p-col-12 container">
+    <div *ngIf="favoriteCities.length > 0">
+      <h3 class="titulo">Mis favoritos</h3>
+      <span class="close" (click)="showFavsPanel = !showFavsPanel"></span>
+      <div class="card-container" id="container">
+        <div class="card" *ngFor="let city of favoriteCities">
+          <div class="card-body">
+            <img class="image" src="{{city.image}}" (click)="onclick(city.uid!.toLowerCase())" alt="">
+            <div class="card-title">
+              <h5 class="title" (click)="onclick(city.uid!.toLowerCase())">{{ city.name }}</h5>
+              <span class="delete-icon" (click)="openDeleteFavDialog(city)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="favoriteCities.length === 0">
+      <p class="no-cities">Sin ciudades favoritas</p>
     </div>
   </div>
 </div>

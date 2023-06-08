@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   resizeApp() {
     const windowH = window.innerHeight;
     const windowW = window.innerWidth;
-    const rest = 73;
+    const rest = 33;
 
     const displayContent = document.getElementById("displayContent");
     if (displayContent) {
@@ -48,14 +48,17 @@ export class LoginComponent implements OnInit {
     this.userNotExists = false;
     if (!this.registerForm.valid) {
       this.existsError = true;
+      this.authService.loading = false;
       return;
     }
     this.authService.SignIn(this.registerForm.value);
     setTimeout(() => {
       if (this.authService.errorCredentials) {
         this.existsError = true;
+        this.authService.loading = false;
       } else if (this.authService.userNotExists) {
         this.userNotExists = true;
+        this.authService.loading = false;
       }
       else {
         this.userNotExists = false;

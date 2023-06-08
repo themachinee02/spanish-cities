@@ -1,9 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
+import { CrudService } from '../shared/services/crud.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel, MatExpansionPanelState } from '@angular/material/expansion';
+
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
 import { Storage, deleteObject, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { City } from '../shared/services/city';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +20,7 @@ export class NavbarComponent {
   diaSemana: string | undefined;
   diaMesAno: string | undefined;
   public showProfilePanel: boolean = false;
+  public showFavsPanel: boolean = false;
   userData: any;
   displayName: string | undefined;
   photoURL: string | undefined;
@@ -22,38 +28,85 @@ export class NavbarComponent {
   name: string | undefined;
   surname: string | undefined
   @ViewChild('profilePanel') profilePanel: ElementRef | undefined;
+  @ViewChild('favPanel', { static: false })
+  favPanel!: ElementRef;
   fromLogin: boolean | undefined;
+  @ViewChild(MatExpansionPanel) panel!: MatExpansionPanel;
+
+  private favoriteCitiesSubscription: Subscription | undefined;
+
+  favoriteCities: City[] = [];
 
   constructor(
     public authService: AuthService,
     private dialog: MatDialog,
     public router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private crudService: CrudService
   ) { }
 
   public goToInitialPage(): void {
     this.router.navigate(['/list/']);
   }
 
+
+
   ngOnInit() {
-    setTimeout(() => {
-      if (this.authService.userData) {
-        console.log(this.authService.userData);
-        this.userData = this.authService.userData;
-        this.displayName = this.userData.displayName;
-        const [name, surname] = this.displayName!.split(' ');
-        this.name = name;
-        this.surname = surname;
-        this.photoURL = this.userData.photoURL;
-        this.email = this.userData.email;
-      }
-    }, 1000);
+    if (this.authService.userData) {
+      //console.log(this.authService.userData);
+      this.userData = this.authService.userData;
+      this.displayName = this.capitalizarPrimeraLetra(this.userData.displayName);
+      const [name, surname] = this.displayName!.split(' ');
+      this.name = this.capitalizarPrimeraLetra(name);
+      this.surname = this.capitalizarPrimeraLetra(surname);
+      this.photoURL = this.userData.photoURL;
+      this.email = this.userData.email;
+
+
+    }
+
+
+
+    this.favoriteCitiesSubscription = this.crudService
+      .showUserFavorites()
+      .subscribe(
+        (cities: City[]) => {
+          //console.log(cities); // Verificar si se obtienen los datos correctamente
+          this.favoriteCities = cities;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
+    this.updateFavoriteCities();
 
     this.actualizarFechaHora();
 
     setInterval(() => {
       this.actualizarFechaHora();
     }, 1000);
+  }
+
+  capitalizarPrimeraLetra(str: string): string {
+    if (str.length === 0) {
+      return str;
+    }
+
+    const palabras = str.split(' ');
+
+    const palabrasCapitalizadas = palabras.map((palabra) => {
+      if (palabra.length === 0) {
+        return palabra;
+      }
+
+      const primeraLetra = palabra.charAt(0).toUpperCase();
+      const restoDePalabra = palabra.slice(1).toLowerCase();
+
+      return primeraLetra + restoDePalabra;
+    });
+
+    return palabrasCapitalizadas.join(' ');
   }
 
   actualizarFechaHora() {
@@ -70,7 +123,7 @@ export class NavbarComponent {
 
     // Obtener el día de la semana actual y capitalizar la primera letra
     const opcionesDiaSemana = { weekday: 'long' };
-    const diaSemana = fechaActual.toLocaleDateString(undefined, opcionesDiaSemana as Intl.DateTimeFormatOptions);
+    const diaSemana = fechaActual.toLocaleDateString('es-ES', opcionesDiaSemana as Intl.DateTimeFormatOptions);
     this.diaSemana = this.capitalizeFirstLetter(diaSemana);
 
     // Obtener el día del mes, mes y año actual y capitalizar la primera letra de los meses
@@ -108,6 +161,39 @@ export class NavbarComponent {
         return;
       }
     });
+  }
+
+  openDeleteFavDialog(city: City): void {
+    const dialogData: ConfirmDialogData = {
+      title: 'Eliminar Favorito',
+      message: 'Se eliminará ' + city.name + ' de favoritos'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Se hizo clic en "Yes"
+        this.removeCityFromFavorite(city);
+      } else {
+        return;
+      }
+    });
+  }
+
+  removeCityFromFavorite(city: City): void {
+    this.crudService
+      .removeCityFromFavorites(city)
+      .then(() => {
+        //console.log('City removed from favorites successfully');
+        this.updateFavoriteCities();
+      })
+      .catch((error) => {
+        console.error('Error removing city from favorites:', error);
+      });
   }
 
   openChangePasswordDialog(): void {
@@ -153,6 +239,12 @@ export class NavbarComponent {
     }
 
     return null;
+  }
+
+  onclick(cityId: string) {
+    if (cityId) {
+      this.router.navigate(['/map/' + cityId]);
+    }
   }
 
   openEditDialog(): void {
@@ -207,7 +299,7 @@ export class NavbarComponent {
                 this.photoURL = undefined;// Actualizar el valor de photoURL en el componente a undefined
                 const storageRef = ref(this.storage, `users/${this.authService.userData.displayName}`);
                 deleteObject(storageRef).then(() => {
-                  console.log(storageRef);
+                  //console.log(storageRef);
                   this.authService.userData.photoURL = undefined;
                   this.authService.userData.providerData.photoURL = undefined;
                   // La imagen se eliminó correctamente
@@ -233,16 +325,48 @@ export class NavbarComponent {
     });
   }
 
+  toggleProfilePanel(): void {
+    this.showProfilePanel = !this.showProfilePanel;
+    this.showFavsPanel = false;
+  }
 
+  toggleFavsPanel(): void {
+    this.resizeApp();
+    this.showFavsPanel = !this.showFavsPanel;
+    this.showProfilePanel = false;
+  }
+  addCityToFavorite(city: City): void {
+    this.crudService
+      .addCityToFavorites(city)
+      .then(() => {
+        //console.log('City added to favorites successfully');
+        this.updateFavoriteCities(); // Llama a la función para actualizar la lista
+      })
+      .catch((error) => {
+        console.error('Error adding city to favorites:', error);
+      });
+  }
 
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent): void {
-    if (
-      this.profilePanel &&
-      !this.profilePanel.nativeElement.contains(event.target as Node) &&
-      !(event.target instanceof HTMLElement && event.target.classList.contains('profile'))
-    ) {
-      this.showProfilePanel = false;
+  updateFavoriteCities(): void {
+    this.crudService.getFavoriteCities().subscribe((favoriteCities: City[]) => {
+      this.favoriteCities = favoriteCities;
+    });
+  }
+
+  @HostListener('window:resize')
+  onWindowResize() {
+    this.resizeApp(); // Llamada al método resizeApp cuando se redimensiona la ventana
+  }
+
+  resizeApp() {
+    const windowH = window.innerHeight;
+    const windowW = window.innerWidth;
+    const rest = 115;
+
+    const displayContent = document.getElementById("container");
+    if (displayContent) {
+      displayContent.style.height = (windowH - rest) + "px";
     }
   }
+
 }

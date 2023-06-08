@@ -8,6 +8,9 @@ import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage
 
 import * as GeoSearch from 'leaflet-geosearch';
 import * as LControl from 'leaflet-control-geocoder';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog.component';
+import { AuthService } from '../shared/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-city',
@@ -37,6 +40,7 @@ export class CreateCityComponent implements OnInit {
   constructor(
     private placesService: CrudService,
     private router: Router,
+    public authService: AuthService,
     private storage: Storage,
     private renderer: Renderer2
   ) {
@@ -76,6 +80,7 @@ export class CreateCityComponent implements OnInit {
   }
 
   send(event: Event) {
+    this.authService.loading = true;
     event.preventDefault();
 
     if (this.formulario.controls['name'].value) {
@@ -110,16 +115,16 @@ export class CreateCityComponent implements OnInit {
       if (this.formulario.valid) {
         this.createCity();
       }
-    }, 2000);
+    }, 5000);
   }
 
   async createCity() {
-    console.log(this.formulario);
 
     if (this.formulario.valid) {
-      console.log(this.formulario);
+      //console.log(this.formulario);
       await this.placesService.addCity(this.formulario.value);
       this.formulario.reset();
+      this.authService.loading = false;
       this.router.navigate(['/list/']);
     }
   }
@@ -208,18 +213,17 @@ export class CreateCityComponent implements OnInit {
   }
 
   uploadImage(file: File) {
-    this.loading = true;
+    this.authService.loading = true;
     this.selectedFile = file;
     const imgRef = ref(this.storage, '/cities/' + this.formulario.controls['name'].value);
 
     uploadBytes(imgRef, this.selectedFile)
       .then(response => {
         this.getImage();
-        this.loading = false;
       })
       .catch(error => {
         console.log(error);
-        this.loading = false;
+        this.authService.loading = false;
       });
   }
 

@@ -1,195 +1,425 @@
-.app-login {
-  padding-top: 0;
-  height: 100vh;
-  overflow: hidden;
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 
-  .displayTable {
-    width: 100%;
-    height: 100%;
-    background: url("../../assets/img/fondo.jpg");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: auto 100%;
+  .loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+  }
 
-    .displayTableCell {
-      position: relative;
-      width: 470px;
-      justify-content: center;
-      display: flex;
-      background: white;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@media (min-width : 769px) {
+  .app-login {
+    padding-top: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    .displayTable {
+      width: 100%;
       height: 100%;
+      background: url("../../assets/img/fondo.jpg");
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: auto 100%;
 
-      .displayContent::-webkit-scrollbar {
-        display: none;
-      }
-
-      .displayContent {
+      .displayTableCell {
+        position: relative;
+        width: 470px;
         justify-content: center;
         display: flex;
-        /* width: 280px; */
-        margin: 70px 6px 0 6px !important;
-        overflow-y: auto;
-        padding-right: 15px;
-        padding-bottom: 10px;
+        background: white;
+        height: 100%;
+
+        .displayContent::-webkit-scrollbar {
+          display: none;
+        }
+
+        .displayContent {
+          justify-content: center;
+          display: flex;
+          /* width: 280px; */
+          margin: 15px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-bottom: 10px;
 
 
 
-        .displayForm {
-          margin-top: 50px;
-          width: 100%;
+          .displayForm {
+            margin-top: 5vh;
+            width: 100%;
 
-          .logo {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 70%;
-          }
-
-          .title {
-            font-size: 20px;
-            text-align: center;
-            margin-top: 35px;
-            margin-bottom: 35px;
-          }
-
-          .authBlock {
-
-            .usuario {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
+            .logo {
               display: block;
-              align-items: center;
-              margin-bottom: 20px;
-              margin-right: 0;
-              margin-left: 0;
-
-              .labelUsername {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputUser {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
+              margin-left: auto;
+              margin-right: auto;
+              width: 70%;
             }
 
-            .contraseña {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-bottom: 0;
-              margin-left: 0;
-
-              .labelPassword {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputPassword {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-              }
-
-
-
+            .title {
+              font-size: 20px;
+              text-align: center;
+              margin-top: 35px;
+              margin-bottom: 35px;
             }
 
+            .authBlock {
 
-            .signIn {
-              .btn {
-                margin-top: 40px;
+              .usuario {
                 width: 280px;
-                height: 40px;
-                background: #004254;
+                //height: 100%;
                 border-radius: 4px;
-                box-shadow: none;
                 display: block;
-                color: white;
-              }
-            }
+                align-items: center;
+                margin-bottom: 20px;
+                margin-right: 0;
+                margin-left: 0;
 
-            .or {
-              text-align: center;
-              margin-top: 15px;
-              margin-bottom: 15px;
-            }
+                .labelUsername {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
 
-            .google {
-              .btn {
-                width: 280px;
-                height: 40px;
-                background: white;
-                border-color: #004254;
-                border-radius: 4px;
-                border-width: 1px;
-                box-shadow: none;
-                display: block;
-                color: #004254;
+                .inputUser {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
 
-                svg {
-                  height: 25px;
-                  margin-top: -3px;
-                  margin-left: 5px;
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
                 }
               }
-            }
 
-            .forgotPassword {
-              text-align: center;
-              margin-top: 15px;
+              .contraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 0;
+                margin-left: 0;
 
-              span {
-                color: #004254;
-                text-decoration: underline;
-                font-size: 14px;
+                .labelPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+
+
               }
-            }
 
-            .redirectToLogin {
-              text-align: center;
-              margin-top: 15px;
 
-              span {
-                color: #004254;
-                text-decoration: none;
+              .signIn {
+                .btn {
+                  margin-top: 40px;
+                  width: 280px;
+                  height: 40px;
+                  background: #004254;
+                  border-radius: 4px;
+                  box-shadow: none;
+                  display: block;
+                  color: white;
+                }
+              }
+
+              .or {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+              }
+
+              .google {
+                .btn {
+                  width: 280px;
+                  height: 40px;
+                  background: white;
+                  border-color: #004254;
+                  border-radius: 4px;
+                  border-width: 1px;
+                  box-shadow: none;
+                  display: block;
+                  color: #004254;
+
+                  svg {
+                    height: 25px;
+                    margin-top: -3px;
+                    margin-left: 5px;
+                  }
+                }
+              }
+
+              .forgotPassword {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: underline;
+                  font-size: 14px;
+                }
+              }
+
+              .redirectToLogin {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: none;
+                }
               }
             }
           }
         }
-      }
 
+      }
+    }
+  }
+}
+
+@media (max-width : 768px) {
+  .app-login {
+    padding-top: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    .displayTable {
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/fondo.jpg");
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: auto 100%;
+
+      .displayTableCell {
+        position: relative;
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        background: white;
+        height: 100%;
+
+        .displayContent::-webkit-scrollbar {
+          display: none;
+        }
+
+        .displayContent {
+          justify-content: center;
+          display: flex;
+          /* width: 280px; */
+          margin: 6px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-bottom: 10px;
+
+
+
+          .displayForm {
+            margin-top: 50px;
+            width: 100%;
+
+            .logo {
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 70%;
+            }
+
+            .title {
+              font-size: 20px;
+              text-align: center;
+              margin-top: 35px;
+              margin-bottom: 35px;
+            }
+
+            .authBlock {
+
+              .usuario {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 20px;
+                margin-right: 0;
+                margin-left: 0;
+
+                .labelUsername {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputUser {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+              }
+
+              .contraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 0;
+                margin-left: 0;
+
+                .labelPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+
+
+              }
+
+
+              .signIn {
+                .btn {
+                  margin-top: 40px;
+                  width: 280px;
+                  height: 40px;
+                  background: #004254;
+                  border-radius: 4px;
+                  box-shadow: none;
+                  display: block;
+                  color: white;
+                }
+              }
+
+              .or {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+              }
+
+              .google {
+                .btn {
+                  width: 280px;
+                  height: 40px;
+                  background: white;
+                  border-color: #004254;
+                  border-radius: 4px;
+                  border-width: 1px;
+                  box-shadow: none;
+                  display: block;
+                  color: #004254;
+
+                  svg {
+                    height: 25px;
+                    margin-top: -3px;
+                    margin-left: 5px;
+                  }
+                }
+              }
+
+              .forgotPassword {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: underline;
+                  font-size: 14px;
+                }
+              }
+
+              .redirectToLogin {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+        }
+
+      }
     }
   }
 }

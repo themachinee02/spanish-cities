@@ -1,6 +1,7 @@
 import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Storage, ref, uploadBytes, getDownloadURL, deleteObject } from '@angular/fire/storage';
+import { AuthService } from '../shared/services/auth.service';
 
 export interface ConfirmDialogData {
   title: string;
@@ -28,11 +29,12 @@ export class ConfirmDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     public storage: Storage,
+    public authService: AuthService,
     @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
   ) { }
 
   ngOnInit() {
-    console.log(this.data.photoURL);
+    //console.log(this.data.photoURL);
     this.localPhotoURL = this.data.photoURL ?? null; // Asignar el valor inicial de photoURL a la variable local
   }
 
@@ -55,9 +57,14 @@ export class ConfirmDialogComponent {
 
     if (file) {
       reader.readAsDataURL(file);
+      setTimeout(() => {
+        this.authService.loading = false;
+      }, 1000);
     } else {
       this.data.photoURL = null;
+      this.authService.loading = false;
     }
+
   }
 
   deleteImage(): void {

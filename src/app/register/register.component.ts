@@ -31,6 +31,8 @@ export class RegisterComponent implements OnInit {
   existsErrorConfirmPassword: boolean = false;
   existEmail: boolean = false;
 
+  loading: boolean = false;
+
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -69,6 +71,7 @@ export class RegisterComponent implements OnInit {
 
 
   signUpViaEmail() {
+    this.loading = true;
     this.registerForm.markAllAsTouched();
 
     if (this.registerForm.valid) {
@@ -81,6 +84,7 @@ export class RegisterComponent implements OnInit {
             this.existsErrorSurname = false;
             this.existsErrorName = false;
             this.existsErrorPassword = false;
+            this.loading = false;
           } else {
             this.authService.SignUp(this.registerForm.value);
           }
@@ -95,6 +99,7 @@ export class RegisterComponent implements OnInit {
       this.existsErrorName = this.registerForm.controls['name'].invalid;
       this.existsErrorPassword = this.registerForm.controls['password'].invalid;
       this.existEmail = false;
+      this.loading = false;
     }
   }
 

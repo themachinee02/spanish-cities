@@ -5,6 +5,7 @@ import * as L from 'leaflet';
 import { marker, tileLayer } from 'leaflet';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 
 
@@ -19,7 +20,8 @@ export class CityMapComponent {
 
   constructor(
     private crudService: CrudService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public authService: AuthService
   ) {
   }
 
@@ -28,7 +30,7 @@ export class CityMapComponent {
 
   ngOnInit(): void {
 
-    console.log(this.activatedRoute.snapshot.params);
+    //console.log(this.activatedRoute.snapshot.params);
     this.uid = this.activatedRoute.snapshot.paramMap.get('id');
     this.getCity();
 
@@ -39,9 +41,9 @@ export class CityMapComponent {
 
       if (cities.length > 0) {
         this.uid = this.capitalizarPrimeraLetra(this.uid!);
-        console.log(this.uid);
+        //console.log(this.uid);
         this.cityChosen = cities.find(x => x.uid === this.uid);
-        console.log(this.cityChosen);
+        //console.log(this.cityChosen);
         if (this.cityChosen) {
           this.createMap(this.cityChosen);
         }

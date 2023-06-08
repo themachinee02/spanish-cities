@@ -15,12 +15,14 @@ export class VerifyEmailComponent {
 
   fromRegister: boolean | undefined;
 
+
   constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.fromRegister = params['fromRegister'] === 'true';
     });
+    this.authService.loading = false;
     this.startVerificationInterval();
   }
 
