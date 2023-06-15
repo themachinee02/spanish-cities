@@ -30,85 +30,200 @@
   }
 }
 
-.app-city-map {
-  padding-top: 60px;
-  height: 100vh;
-  overflow: hidden;
+@media (min-width: 768px) {
+  .app-city-map {
+    padding-top: 60px;
+    height: 100vh;
+    overflow: hidden;
 
-  .displayTable {
-    width: 100%;
-    height: 100%;
-    display: flex;
-
-    .displayTableCell {
-      width: 470px;
-      justify-content: center;
+    .displayTable {
+      width: 100%;
+      height: 100%;
       display: flex;
-      background: white;
 
-      .displayContent {
+      .displayTableCell {
+        width: 470px;
         justify-content: center;
         display: flex;
-        margin: 70px 6px 0 6px !important;
-        overflow-y: auto;
-        padding-bottom: 10px;
-        justify-content: center;
+        background: white;
 
-        .city {
+        .displayContent {
+          justify-content: center;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding-top: 80px;
-          height: 100%;
+          margin: 70px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-bottom: 10px;
+          justify-content: center;
+
+          .city {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            height: 100%;
 
 
-          .name {
-            margin-top: 35px;
-            margin-bottom: 35px;
-
-            .nameText {
-              font-size: 20px;
-              text-align: center;
-            }
-
-          }
-
-          .image {
-            margin-top: 35px;
-            margin-bottom: 35px;
-
-            img {
-              width: 400px;
-              height: 230px;
-              object-fit: contain;
-            }
-          }
-
-          .volver {
-            .btn {
+            .name {
               margin-top: 35px;
-              width: 280px;
-              height: 40px;
-              background: #004254;
-              border-radius: 4px;
-              box-shadow: none;
-              display: block;
-              color: white;
+              margin-bottom: 35px;
+
+              .nameText {
+                font-size: 20px;
+                text-align: center;
+              }
+
+            }
+
+            .image {
+              margin-top: 35px;
+              margin-bottom: 35px;
+
+              img {
+                width: 400px;
+                height: 230px;
+                object-fit: contain;
+              }
+            }
+
+            .volver {
+              .btn {
+                margin-top: 35px;
+                width: 280px;
+                height: 40px;
+                background: #004254;
+                border-radius: 4px;
+                box-shadow: none;
+                display: block;
+                color: white;
+              }
+            }
+
+
+          }
+        }
+      }
+
+      .map-container {
+        flex: 1;
+        height: 100%;
+
+        #map {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  app-navbar {
+    display: none;
+  }
+
+  .app-city-map {
+    padding-top: 15px;
+    height: 100vh;
+    overflow: hidden;
+
+    .displayTable {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .displayTableCell {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        background: white;
+
+        .displayContent {
+          justify-content: center;
+          display: flex;
+          margin: 6px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-bottom: 10px;
+          justify-content: center;
+
+          .city {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+
+            .name {
+              margin-top: 15px;
+              margin-bottom: 15px;
+
+              .nameText {
+                font-size: 20px;
+                text-align: center;
+              }
+            }
+
+            .image {
+              order: 1;
+              margin-top: 15px;
+              margin-bottom: 25px;
+
+              img {
+                width: 360px;
+                height: 230px;
+                object-fit: contain;
+              }
+            }
+
+            .volver {
+              position: absolute;
+              bottom: 20px;
+              z-index: 2;
+
+              .btn {
+                width: 280px;
+                height: 40px;
+                background: #004254;
+                border-radius: 4px;
+                box-shadow: none;
+                display: block;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+
+      .map-container {
+        order: 2;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        bottom: 0;
+        height: 50%;
+
+        #map {
+          width: 100vw;
+          height: 100% !important;
+
+          ::after {
+            box-sizing: none;
+          }
+
+          .leaflet-container {
+            height: 100% !important;
+
+            .leaflet-control-zoom {
+              display: none !important;
             }
           }
 
 
         }
-      }
-    }
-
-    .map-container {
-      flex: 1;
-      height: 100%;
-
-      #map {
-        height: 100%;
       }
     }
   }

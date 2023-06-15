@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
   resizeApp() {
     const windowH = window.innerHeight;
     const windowW = window.innerWidth;
-    const rest = 73;
+    const rest = 33;
 
     const displayContent = document.getElementById("displayContent");
     if (displayContent) {

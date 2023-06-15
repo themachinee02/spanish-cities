@@ -14,7 +14,8 @@
               <div class="formGroup nombre">
                 <label for="name" class="labelName">Nombre</label>
                 <input type="text" formControlName="name" class="formControl inputName" placeholder="Nombre" #userName
-                  [ngClass]="this.existsErrorName? 'fieldObligatoryError':''" required />
+                  [ngClass]="this.existsErrorName? 'fieldObligatoryError':''" required
+                  style="text-transform: capitalize;" />
 
                 <p class="fieldObligatoryError" *ngIf="this.existsErrorName">
                   Introduzca un nombre</p>
@@ -23,7 +24,8 @@
               <div class="formGroup apellidos">
                 <label for="surnames" class="labelSurname">Apellidos</label>
                 <input type="text" formControlName="surnames" class="formControl inputSurname" placeholder="Apellidos"
-                  [ngClass]="this.existsErrorSurname? 'fieldObligatoryError':''" #userSurnames required />
+                  [ngClass]="this.existsErrorSurname? 'fieldObligatoryError':''" #userSurnames required
+                  style="text-transform: capitalize;" />
 
                 <p class="fieldObligatoryError" *ngIf="this.existsErrorSurname">
                   Introduzca los apellidos</p>

@@ -30,325 +30,650 @@
   }
 }
 
-.app-register {
-  padding-top: 0;
-  height: 100vh;
-  overflow: hidden;
+@media (max-width: 767px) {
+  .app-register {
+    padding-top: 0;
+    height: 100vh;
+    overflow: hidden;
 
-  .displayTable {
-    width: 100%;
-    height: 100%;
-    background: url("../../assets/img/fondo.jpg");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: auto 100%;
-
-    .displayTableCell {
-      position: relative;
-      width: 470px;
-      justify-content: center;
-      display: flex;
-      background: white;
+    .displayTable {
+      width: 100%;
       height: 100%;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: auto 100%;
 
-      .displayContent::-webkit-scrollbar {
-        display: none;
-      }
-
-      .displayContent {
+      .displayTableCell {
+        position: relative;
+        width: 100%;
         justify-content: center;
         display: flex;
-        /* width: 280px; */
-        margin: 70px 6px 0 6px !important;
-        overflow-y: auto;
-        padding-right: 15px;
-        padding-bottom: 10px;
+        background: white;
+        height: 100%;
 
-
-
-        .displayForm {
-          margin-top: 25px;
-          width: 100%;
-
-          .logo {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 40%;
-          }
-
-          .title {
-            font-size: 20px;
-            text-align: center;
-            margin-top: 15px;
-            margin-bottom: 15px;
-          }
-
-          .authBlock {
-
-            .email {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-bottom: 15px;
-              margin-right: 0;
-              margin-left: 0;
-
-              .labelEmail {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputEmail {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-              }
-            }
-
-            .contraseña {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-left: 0;
-              margin-bottom: 15px;
-
-              .labelPassword {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputPassword {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-              }
-            }
-
-            .confirmaContraseña {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-left: 0;
-              margin-bottom: 0;
-
-              .labelConfirmPassword {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .confirmPassword {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-
-              }
-
-            }
-
-            .nombre {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-left: 0;
-              margin-bottom: 15px;
-
-              .labelName {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputName {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-              }
-
-            }
-
-            .apellidos {
-              width: 280px;
-              //height: 100%;
-              border-radius: 4px;
-              display: block;
-              align-items: center;
-              margin-bottom: 15px;
-              margin-left: 0;
-
-              .labelSurname {
-                color: #44667F;
-                font-size: 14px;
-                margin-bottom: 6px;
-                display: inline-block;
-              }
-
-              .inputSurname {
-                outline: none !important;
-                height: 38px !important;
-                padding-left: 10px;
-                border: 1px solid #BACCDB;
-                border-radius: 4px;
-                width: 100%;
-
-                &.fieldObligatoryError {
-                  border: 1px solid red !important;
-                }
-              }
-
-              p {
-                font-size: 12px;
-
-                &.fieldObligatoryError {
-                  color: red !important;
-                }
-              }
-
-            }
-
-            .emailSign {
-              .btn {
-                margin-top: 30px;
-                width: 280px;
-                height: 40px;
-                background: #004254;
-                border-radius: 4px;
-                box-shadow: none;
-                display: block;
-                color: white;
-              }
-            }
-
-            .or {
-              text-align: center;
-              margin-top: 15px;
-              margin-bottom: 15px;
-            }
-
-            .google {
-              .btn {
-                width: 280px;
-                height: 40px;
-                background: white;
-                border-color: #004254;
-                border-radius: 4px;
-                border-width: 1px;
-                box-shadow: none;
-                display: block;
-                color: #004254;
-              }
-
-              svg {
-                height: 25px;
-                margin-top: -3px;
-                margin-left: 5px;
-              }
-            }
-
-            .forgotPassword {
-              text-align: center;
-              margin-top: 15px;
-
-              span {
-                color: #004254;
-                text-decoration: underline;
-                font-size: 14px;
-              }
-            }
-
-            .redirectToLogin {
-              text-align: center;
-              margin-top: 15px;
-
-              span {
-                color: #004254;
-                text-decoration: none;
-              }
-            }
-          }
+        .displayContent::-webkit-scrollbar {
+          display: none;
         }
 
-      }
-    }
+        .displayContent {
+          justify-content: center;
+          display: flex;
+          /* width: 280px; */
+          margin: 25px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-bottom: 10px;
 
+
+
+          .displayForm {
+            margin-top: 25px;
+            width: 100%;
+
+            .logo {
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 40%;
+            }
+
+            .title {
+              font-size: 20px;
+              text-align: center;
+              margin-top: 15px;
+              margin-bottom: 15px;
+            }
+
+            .authBlock {
+
+              .email {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 15px;
+                margin-right: 0;
+                margin-left: 0;
+
+                .labelEmail {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputEmail {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+              }
+
+              .contraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 15px;
+
+                .labelPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+              }
+
+              .confirmaContraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 0;
+
+                .labelConfirmPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .confirmPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+
+                }
+
+              }
+
+              .nombre {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 15px;
+
+                .labelName {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputName {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+              }
+
+              .apellidos {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 15px;
+                margin-left: 0;
+
+                .labelSurname {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputSurname {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+              }
+
+              .emailSign {
+                .btn {
+                  margin-top: 30px;
+                  width: 280px;
+                  height: 40px;
+                  background: #004254;
+                  border-radius: 4px;
+                  box-shadow: none;
+                  display: block;
+                  color: white;
+                }
+              }
+
+              .or {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+              }
+
+              .google {
+                .btn {
+                  width: 280px;
+                  height: 40px;
+                  background: white;
+                  border-color: #004254;
+                  border-radius: 4px;
+                  border-width: 1px;
+                  box-shadow: none;
+                  display: block;
+                  color: #004254;
+                }
+
+                svg {
+                  height: 25px;
+                  margin-top: -3px;
+                  margin-left: 5px;
+                }
+              }
+
+              .forgotPassword {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: underline;
+                  font-size: 14px;
+                }
+              }
+
+              .redirectToLogin {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .app-register {
+    padding-top: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    .displayTable {
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/fondo.jpg");
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: auto 100%;
+
+      .displayTableCell {
+        position: relative;
+        width: 470px;
+        justify-content: center;
+        display: flex;
+        background: white;
+        height: 100%;
+
+        .displayContent::-webkit-scrollbar {
+          display: none;
+        }
+
+        .displayContent {
+          justify-content: center;
+          display: flex;
+          /* width: 280px; */
+          margin: 6px 6px 0 6px !important;
+          overflow-y: auto;
+          padding-right: 15px;
+          padding-bottom: 10px;
+
+
+
+          .displayForm {
+            margin-top: 5vh;
+            width: 100%;
+
+            .logo {
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 40%;
+            }
+
+            .title {
+              font-size: 20px;
+              text-align: center;
+              margin-top: 15px;
+              margin-bottom: 15px;
+            }
+
+            .authBlock {
+
+              .email {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 15px;
+                margin-right: 0;
+                margin-left: 0;
+
+                .labelEmail {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputEmail {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+              }
+
+              .contraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 15px;
+
+                .labelPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+              }
+
+              .confirmaContraseña {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 0;
+
+                .labelConfirmPassword {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .confirmPassword {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+
+                }
+
+              }
+
+              .nombre {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-left: 0;
+                margin-bottom: 15px;
+
+                .labelName {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputName {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+              }
+
+              .apellidos {
+                width: 280px;
+                //height: 100%;
+                border-radius: 4px;
+                display: block;
+                align-items: center;
+                margin-bottom: 15px;
+                margin-left: 0;
+
+                .labelSurname {
+                  color: #44667F;
+                  font-size: 14px;
+                  margin-bottom: 6px;
+                  display: inline-block;
+                }
+
+                .inputSurname {
+                  outline: none !important;
+                  height: 38px !important;
+                  padding-left: 10px;
+                  border: 1px solid #BACCDB;
+                  border-radius: 4px;
+                  width: 100%;
+
+                  &.fieldObligatoryError {
+                    border: 1px solid red !important;
+                  }
+                }
+
+                p {
+                  font-size: 12px;
+
+                  &.fieldObligatoryError {
+                    color: red !important;
+                  }
+                }
+
+              }
+
+              .emailSign {
+                .btn {
+                  margin-top: 30px;
+                  width: 280px;
+                  height: 40px;
+                  background: #004254;
+                  border-radius: 4px;
+                  box-shadow: none;
+                  display: block;
+                  color: white;
+                }
+              }
+
+              .or {
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 15px;
+              }
+
+              .google {
+                .btn {
+                  width: 280px;
+                  height: 40px;
+                  background: white;
+                  border-color: #004254;
+                  border-radius: 4px;
+                  border-width: 1px;
+                  box-shadow: none;
+                  display: block;
+                  color: #004254;
+                }
+
+                svg {
+                  height: 25px;
+                  margin-top: -3px;
+                  margin-left: 5px;
+                }
+              }
+
+              .forgotPassword {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: underline;
+                  font-size: 14px;
+                }
+              }
+
+              .redirectToLogin {
+                text-align: center;
+                margin-top: 15px;
+
+                span {
+                  color: #004254;
+                  text-decoration: none;
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+    }
   }
 }

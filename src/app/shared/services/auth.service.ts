@@ -47,7 +47,7 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(userData: User) {
-    this.loading = true;
+    //this.loading = true;
     this.errorCredentials = false;
     this.userNotExists = false;
     return this.afAuth
@@ -230,25 +230,20 @@ export class AuthService {
   }
 
   updatePhotoURL(photoURL: string | null): Promise<void> {
-    return this.afAuth.currentUser.then(user => {
-      if (user) {
-        return user.updateProfile({ photoURL }).then(() => {
-          this.userData.photoURL = photoURL; // Actualizar el valor en authService.userData
-          localStorage.setItem('user', JSON.stringify(this.userData)); // Actualizar el valor en el localStorage
-
-          // Eliminar la foto del almacenamiento local si la URL es nula
+    const currentUser = this.afAuth.currentUser;
+    if (currentUser) {
+      return currentUser.then(user => {
+        return user!.updateProfile({ photoURL }).then(() => {
+          this.userData = user; // Actualizar el objeto this.userData con el usuario actualizado
+          localStorage.setItem('user', JSON.stringify(this.userData));
           if (photoURL === null) {
-            localStorage.removeItem('userPhoto'); // Eliminar la foto del almacenamiento local
+            localStorage.removeItem('userPhoto');
           }
         });
-      }
-      throw new Error('Usuario no encontrado');
-    }).catch(error => {
-      console.error('Error al actualizar la foto del perfil:', error);
-      throw error; // Relanzar el error para que se pueda manejar en otra parte del código
-    });
+      });
+    }
+    throw new Error('Usuario no encontrado');
   }
-
 
   public navigateToLogin() {
     this.router.navigate(['/login']);

@@ -128,10 +128,18 @@ export class NavbarComponent {
 
     // Obtener el día del mes, mes y año actual y capitalizar la primera letra de los meses
     const dia = fechaActual.getDate();
-    const mes = fechaActual.toLocaleString('default', { month: 'long' });
+    const mes = fechaActual.getMonth();
     const año = fechaActual.getFullYear();
 
-    this.diaMesAno = `${dia} de ${this.capitalizeFirstLetter(mes)} de ${año}`;
+    this.diaMesAno = `${dia} de ${this.capitalizeFirstLetter(this.getMonthNameSpanish(mes))} de ${año}`;
+  }
+
+  getMonthNameSpanish(month: number): string {
+    const monthNames = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ];
+    return monthNames[month];
   }
 
   capitalizeFirstLetter(str: string): string {
@@ -142,7 +150,16 @@ export class NavbarComponent {
     }
   }
 
+
   openlogOutDialog(): void {
+
+    if (this.showFavsPanel) {
+      this.showFavsPanel = false;
+    }
+    if (this.showProfilePanel) {
+      this.showProfilePanel = false;
+    }
+
     const dialogData: ConfirmDialogData = {
       title: 'Cerrar sesión',
       message: '¿Está seguro de cerrar sesión?'
@@ -296,12 +313,11 @@ export class NavbarComponent {
               // No se seleccionó una nueva imagen, pero se eliminó la imagen existente
               this.authService.updatePhotoURL(null).then(() => {
                 // El photoURL se actualizó correctamente
-                this.photoURL = undefined;// Actualizar el valor de photoURL en el componente a undefined
+                this.photoURL = undefined; // Actualizar el valor de photoURL en el componente a undefined
                 const storageRef = ref(this.storage, `users/${this.authService.userData.displayName}`);
                 deleteObject(storageRef).then(() => {
-                  //console.log(storageRef);
                   this.authService.userData.photoURL = undefined;
-                  this.authService.userData.providerData.photoURL = undefined;
+                  this.authService.userData.providerData[0].photoURL = undefined;
                   // La imagen se eliminó correctamente
                 }).catch(error => {
                   // Ocurrió un error al eliminar la imagen del almacenamiento de Firebase

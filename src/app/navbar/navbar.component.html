@@ -44,7 +44,7 @@
           <!-- WITH IMAGE -->
 
           <div class="editImage">
-            <span class="edit" (click)="openEditDialog()"></span>
+            <span class="edit" (click)="openEditDialog(); showProfilePanel = !showProfilePanel"></span>
           </div>
 
           <p class="user">{{ displayName }}</p>
@@ -85,7 +85,8 @@
       </div>
     </div>
     <div class="button">
-      <input type="button" class="btn btnPrimary" value="Cambiar Contraseña" (click)="openChangePasswordDialog()" />
+      <input type="button" class="btn btnPrimary" value="Cambiar Contraseña"
+        (click)="openChangePasswordDialog(); showProfilePanel = !showProfilePanel" />
     </div>
   </div>
 </div>
